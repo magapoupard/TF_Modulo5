@@ -1,6 +1,6 @@
 # Registro de decisiones metodológicas — TF Módulo 5
 
-**Cursante:** **MAGALI POUPARD**
+**Cursante:** MAGALI POUPARD. **Repositorio:** https://github.com/magapoupard/TF_Modulo5
 
 Regla: cada decisión lleva **fecha**, **decisión**, **fundamento** y **alternativa descartada** (si aplica). Referencias en APA 7.ª.
 
@@ -10,31 +10,37 @@ Este archivo es la diferencia entre un método documentado y una sucesión de aj
 
 ## Plantilla de entrada
 
-### 2026-09-29 — Monitoreo Forestal con AI asistida en SIG
+### AAAA-MM-DD — Título corto
 
-* **Etapa:** caso-AOI
-* **Decisión:**  Variante A (clasificación de coberturas)
-* **Fundamento:** la pregunta es de estado: dónde se encuentran los bosques nativos del ejido y qué superficie ocupan en la actualidad
-* **Alternativa descartada:**  Variante B (monitoreo de cambio), porque el  objetivo no es cuantificar pérdida entre dos fechas sino caracterizar la situación actual.
-* **Evidencia / archivo:**  data/raw/aoi.geojson (CRS: [EPSG:5347 - POSGAR 2007 / Argentina 5])
-* **Responsable (humano):** MAGALI POUPARD
+* **Etapa:** (caso-AOI / clases / evidencia / muestreo / implementación / validación / cierre)
+* **Decisión:** 
+* **Fundamento:** 
+* **Alternativa descartada:**  
+* **Evidencia / archivo:**  
+* **Responsable (humano):**
 
 ---
 
 ## 1\. Caso, AOI y techo de cómputo
 
-### 2026-10-01-**\-** — Variante A y problema de gestión
+### 2026-10-01 — Variante A y problema de gestión
 
-* **Decisión:**  Variante A (clasificación de coberturas) 
+* **Etapa:** caso-AOI
+* **Decisión:** Variante A (clasificación de coberturas).
 * **Decisión de gestión que depende del mapa:** Actualización del OTBN dentro del Ejido Municipal de Paso de la Patria, Corrientes, como insumo para delimitar áreas no urbanizables en el ámbito de la administración municipal.
-* **Fundamento:** se requiere indentificar los bosques nativos del ejido y qué superficie ocupan en la actualidad. Esa información es la base para zonificar el bosque a escala municipal en concordancia con el OTBN provincial y para restringir la urbanización sobre él.
+* **Fundamento:** La pregunta es de estado: dónde se encuentran los bosques nativos del ejido y qué superficie ocupan en la actualidad. Esa información es la base para zonificar el bosque a escala municipal en concordancia con el OTBN provincial y para restringir la urbanización sobre él.
+* **Alternativa descartada:** Variante B (monitoreo de cambio), porque el objetivo no es cuantificar pérdida entre dos fechas sino caracterizar la situación actual.
+* **Responsable (humano):** MAGALI POUPARD
 
-### 2026-10-01-**\-** — Delimitación del AOI (*Area of Interest*)
+### 2026-10-01 — Delimitación del AOI (*Area of Interest*)
 
-* **Extensión aproximada (ha):** 10706 mil ha.  
+* **Etapa:** caso-AOI
+* **Extensión aproximada (ha):** 10.706 ha.  
 * **¿Respeta el techo 5.000–20.000 ha?** sí 
-* **Fundamento del AOI:** Se estableció el polígono correspondiente al area no urbanizada, o con asentamientos muy dispersos
-
+* **Fundamento del AOI:** Se determinó un correspondiente al áraa no urbanizada, o con asentamientos muy dispersos.
+* **Alternativa descartada:**  
+* **Evidencia / archivo:** data/raw/aoi.geojson (CRS:EPSG:5347 - POSGAR 2007 / Argentina 5)
+* **Responsable (humano):** MAGALI POUPARD
 ---
 
 ## 2\. Clases y umbrales
