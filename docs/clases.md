@@ -1,10 +1,10 @@
 # Definición operativa de clases — TF Módulo 5
 
-**Cursante:** ________________
-**Variante:** A / B
-**AOI (área de estudio):** ________________   **Superficie aprox. (ha):** ________
-**CRS:** ________________
-**Fecha:** ________________
+**Cursante:** MAGALI POUPARD
+**Variante:** A 
+**AOI (área de estudio):** área no urbanizada del ejido municipal de Paso de la Patria, Corrientes **Superficie aprox. (ha):** 10.706 ha
+**CRS:** EPSG:5347 - POSGAR 2007 / Argentina 5
+**Fecha:** 2026/10/04
 
 Completar **antes** de entrenar. Sin este documento la matriz de confusión no tiene interpretación posible: no se sabría qué se estaba distinguiendo.
 
@@ -14,13 +14,11 @@ Esquema propio, simplificado, orientado a la gestión ambiental rural del NEA. T
 
 ## 1. Pregunta de gestión (una frase)
 
-_______________________________________________________________________
+Dónde se ubican y de cuál es la superficie de los bosques nativos, y sus categorías, dentro del ejido municipal de Paso de la Patria, Corrientes
 
 **¿Qué decisión administrativa o de manejo depende de la respuesta?**
 
-_______________________________________________________________________
-
----
+La actualización del OTBN, dentro del ejido de Paso de la Patria, y las restricciones a la urbanización en correspondencia con las áreas de bosques nativos de categorías 1 y 2 identificadas.
 
 ## 2. Clases a usar
 
@@ -28,12 +26,12 @@ Marcar las que aplican. **Cada clase marcada necesita al menos 4 polígonos de R
 
 | Código | Clase | ¿Usamos? | Criterio operativo en nuestro AOI (con umbral explícito) |
 | :---: | :--- | :---: | :--- |
-| 1 | Agua / cuerpos de agua | ☐ | |
-| 2 | Bosque / cubierta leñosa densa | ☐ | |
-| 3 | Sabana / mosaico árbol–pastizal | ☐ | |
-| 4 | Pastizal / herbáceas | ☐ | |
-| 5 | Cultivo / uso agrícola | ☐ | |
-| 6 | Suelo desnudo / escasa vegetación | ☐ | |
+| 1 | Agua / cuerpos de agua | SI |superficie cubierta por agua libre, por lo menos en una de las ventanas.
+| 2 | Bosque / cubierta leñosa densa | SI |superficie mínima de 0,5 ha de ocupación continua, 3 m de altura mínima y 20 % de cobertura de copas mínima.|
+| 3 | Sabana / mosaico árbol–pastizal | SI |superficie con arborización, que no cumpla con el criterio de bosque|
+| 4 | Pastizal / herbáceas | NO  | |
+| 5 | Cultivo / uso agrícola | NO | |
+| 6 | Suelo desnudo / escasa vegetación | SI | |
 | 7 | Otra (especificar): ____________ | ☐ | |
 
 *El código del campo `clase` de los ROI debe coincidir con esta tabla.*
