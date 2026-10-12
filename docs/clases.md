@@ -26,14 +26,13 @@ Marcar las que aplican. **Cada clase marcada necesita al menos 4 polígonos de R
 
 | Código | Clase | ¿Usamos? | Criterio operativo en nuestro AOI (con umbral explícito) |
 | :---: | :--- | :---: | :--- |
-| 1 | Agua / cuerpos de agua /humedal| SI |superficie cubierta por agua libre, en las dos ventanas.
-| 2 | Bosque / cubierta leñosa densa | SI |superficie mínima de 0,5 ha de ocupación continua, 3 m de altura mínima y 20 % de cobertura de copas mínima.(criterio para definición de BN conforme Resolución COFEMA 230/12)|
-| 3 | Sabana / mosaico árbol–pastizal | SI |Matriz herbácea con árboles o palmeras nativos dispersos, con cobertura de copas entre 5 % y menos de 20 %, en una superficie continua de al menos 0,5 ha (ref.: "otras tierras forestales", Inventario Nacional de Bosques Nativos; superficie mínima igual a la MMU)|
-| 4 | Pastizal / herbáceas | SI |Vegetación herbácea con cobertura de copas arbóreas menor al 5 %, en una superficie continua de al menos 0,5 ha (superficie mínima igual a la MMU). |
-| 5 | Cultivo / uso agrícola | NO | | NO APLICA
-| 6 | Suelo desnudo / escasa vegetación | NO| |NO APLICA
-| 7 | Humedal | SI |superficie cubierta por agua libre o con vegetación, en una de las dos ventanas.
-| 8 | Urbanizado |SI | Superficie contínua de 0.50 ha o más, con presencia de construcciones, casas y caminos, en al menos el 30% de la superficie |
+| 1 | Agua / cuerpos de agua | SI |superficie cubierta por agua libre, en las dos ventanas.
+| 2 | Bosque / cubierta leñosa densa | SI |superficie mínima de 0,5 ha de ocupación continua, 3 m de altura mínima y 20 % de cobertura de copas mínima.(criterio para definición de BN conforme Resolución COFEMA 230/12; superficie mínima igual a la MMU)|
+| 3 | Sabana / pastizal | SI |Matriz herbácea con árboles o palmeras nativos dispersos, con cobertura de copas menor al 20 %, en una superficie continua de al menos 0,5 ha (ref.: "otras tierras forestales", Inventario Nacional de Bosques Nativos; superficie mínima igual a la MMU)|
+| 4 | Cultivo / uso agrícola | NO | | NO APLICA
+| 5 | Suelo desnudo / escasa vegetación | NO| |NO APLICA
+| 6 | Humedal | SI |superficie cubierta por agua libre o con vegetación, en una de las dos ventanas.
+| 7 | Urbanizado | SI | Superficie contínua de 0.50 ha o más, con presencia de construcciones, casas y caminos, en al menos el 30% de la superficie |
 
 *El código del campo `clase` de los ROI debe coincidir con esta tabla.*
 
@@ -45,10 +44,10 @@ Marcar las que aplican. **Cada clase marcada necesita al menos 4 polígonos de R
 
 | Parámetro | Valor | Justificación breve |
 | :--- | :--- | :--- |
-| MMU (*Minimum Mapping Unit*, unidad mínima cartografiable) | 0.5 ha | es el umbral mínimo para los bosques nativos conforme definición de la Resolución del COFEMA 230/12, complementaria a la Ley de OTBN) |
+| MMU (*Minimum Mapping Unit*, unidad mínima cartografiable) | 0.5 ha | es el umbral mínimo para los bosques nativos conforme definición de la Resolución del COFEMA 230/12, complementaria a la Ley de OTBN)|
 | Ventana temporal 1 |2025-12-01  /2026-02-01 | |
-| Ventana temporal 2 (recomendada) |2026-05-01 /2026-08-01 | |
-| Índices | NDVI ☐ NDMI ☐ dNDVI ☐ otro: ______ | |
+| Ventana temporal 2 (recomendada) |2026-05-01 /2026-09-01 | |
+| Índices | NDVI ☒ NDMI ☒ dNDVI ☒ otro: ______ | NDVI: separa vegetación de agua y suelo desnudo, y distingue niveles de verdor. NDMI: aporta el contenido de humedad de la vegetación, que diferencia la vegetación boscosa del pastizal. dNDVI: mide el cambio de verdor entre verano e invierno (contraste fenológico), principal rasgo para separar bosque nativo de vegetación no boscosa. | |
 
 **Si trabajan con una sola ventana**, escriban aquí por qué y qué clases quedan potencialmente confundidas:
 
@@ -60,13 +59,18 @@ _______________________________________________________________________
 
 ¿Qué coberturas distintas pueden parecerse a las de interés? (forestaciones, cultivos perennes, pasturas implantadas, suelos compactados, salitrales…)
 
-_______________________________________________________________________
+- **Arbustales densos de menos de 3 m → Bosque nativo.** Sentinel-2 no mide altura; con alta cobertura pueden confundirse con bosque, aunque la Res. COFEMA 230/12 excluye los arbustales puros.
+- **Formaciones cercanas al 20 % de cobertura de copas → Bosque nativo o Sabana / pastizal.** A 10 m de resolución, árboles dispersos y pasto se mezclan en el mismo píxel; el umbral se aplica al etiquetar las muestras y es esperable confusión en ese límite.
+- **Esteros con vegetación que no se inundaron en ninguna ventana → Sabana / pastizal.** El criterio de humedal depende del nivel del agua en las fechas elegidas; en este caso no fue prioritario elegir años con altos niveles de agua, ya que se prioriza identificar los bosques.
+- **Cultivos y lotes arados → Sabana / pastizal o Urbanizado.** No tienen clase propia: con vegetación se parecen al pastizal; arados o recién cosechados, al suelo expuesto de áreas urbanizadas.
+- **Viviendas dispersas con jardines o arboleda (quintas, casas de fin de semana) → Sabana / pastizal o Bosque nativo.** Con menos de 30 % de construcciones, o con mucha arboleda, quedan fuera de Urbanizado.
+- **Caminos de tierra → Urbanizado o eliminados por la MMU.** Son angostos; la mayoría desaparece con el tamizado y el resto puede confundirse con construcciones._____________________________________________________
 
 ---
 
 ## 5. Limitación principal (una línea)
 
-_______________________________________________________________________
+La limitación principal consiste en la difucultad para estimar la altura de las copas , el mapa no mide altura ni distingue árboles de arbustos: la separación entre bosque nativo y sabana / pastizal cerca del umbral del 20 % de cobertura, dependen de la fotointerpretación de las muestras y deben verificarse en terreno._________________________________________________
 
 ---
 
