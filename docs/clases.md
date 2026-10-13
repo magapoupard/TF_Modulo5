@@ -59,9 +59,9 @@ _______________________________________________________________________
 
 ¿Qué coberturas distintas pueden parecerse a las de interés? (forestaciones, cultivos perennes, pasturas implantadas, suelos compactados, salitrales…)
 
-- **Arbustales densos de menos de 3 m → Bosque nativo.** Sentinel-2 no mide altura; con alta cobertura pueden confundirse con bosque, aunque la Res. COFEMA 230/12 excluye los arbustales puros.
+- **Arbustales densos de menos de 3 m → Bosque nativo.** con alta cobertura pueden confundirse con bosque
 - **Formaciones cercanas al 20 % de cobertura de copas → Bosque nativo o Sabana / pastizal.** A 10 m de resolución, árboles dispersos y pasto se mezclan en el mismo píxel; el umbral se aplica al etiquetar las muestras y es esperable confusión en ese límite.
-- **Esteros con vegetación que no se inundaron en ninguna ventana → Sabana / pastizal.** El criterio de humedal depende del nivel del agua en las fechas elegidas; en este caso no fue prioritario elegir años con altos niveles de agua, ya que se prioriza identificar los bosques.
+- **Esteros con vegetación que no se inundaron en ninguna ventana → Sabana / pastizal.** El criterio de humedal depende del nivel del agua en las fechas elegidas; en este caso no fue prioritario elegir ventanas conocidas con altos niveles de agua, ya que se prioriza identificar los bosques.
 - **Cultivos y lotes arados → Sabana / pastizal o Urbanizado.** No tienen clase propia: con vegetación se parecen al pastizal; arados o recién cosechados, al suelo expuesto de áreas urbanizadas.
 - **Viviendas dispersas con jardines o arboleda (quintas, casas de fin de semana) → Sabana / pastizal o Bosque nativo.** Con menos de 30 % de construcciones, o con mucha arboleda, quedan fuera de Urbanizado.
 - **Caminos de tierra → Urbanizado o eliminados por la MMU.** Son angostos; la mayoría desaparece con el tamizado y el resto puede confundirse con construcciones._____________________________________________________
@@ -70,7 +70,7 @@ _______________________________________________________________________
 
 ## 5. Limitación principal (una línea)
 
-La limitación principal consiste en la difucultad para estimar la altura de las copas , el mapa no mide altura ni distingue árboles de arbustos: la separación entre bosque nativo y sabana / pastizal cerca del umbral del 20 % de cobertura, dependen de la fotointerpretación de las muestras y deben verificarse en terreno._________________________________________________
+La limitación principal consiste en la difucultad para estimar la altura de las copas , el mapa no mide altura ni distingue árboles de arbustos: la separación entre bosque nativo y sabana / pastizal cerca del umbral del 20 % de cobertura, dependen de la fotointerpretación de las muestras y deben verificarse en terreno.__
 
 ---
 
