@@ -37,31 +37,31 @@ Este archivo es la diferencia entre un método documentado y una sucesión de aj
 * **Etapa:** caso-AOI
 * **Extensión aproximada (ha):** 10.706 ha.  
 * **¿Respeta el techo 5.000–20.000 ha?** sí 
-* **Fundamento del AOI:** Se determinó un correspondiente al áraa no urbanizada, o con asentamientos muy dispersos.
-* **Alternativa descartada:**  
+* **Fundamento del AOI:** Se determinó un polígono correspondiente al área no urbanizada, o con asentamientos muy dispersos.
+* **Alternativa descartada:**  Tomar todo el ejido municipal de Paso de la Patria, ya que la posibi
 * **Evidencia / archivo:** data/raw/aoi.geojson (CRS:EPSG:5347 - POSGAR 2007 / Argentina 5)
 * **Responsable (humano):** MAGALI POUPARD
 ---
 
 ## 2\. Clases y umbrales
 
-### 2026-10-01-**\-** — Esquema de clases
+### 2026-10-01 — Esquema de clases
 
-* **Decisión:** se seleccionaron 4 clases, bosques nativos, urbanizado, sabana y humedales (vincular a `docs/clases.md`)  
-* **MMU** (*Minimum Mapping Unit*): 0.5 ha — **¿se aplicó el tamizado?** sí / no  
-* **Alternativa descartada:**
+* **Decisión:** se seleccionaron 4 clases, bosques nativos, urbanizado, sabana/ pastizal, humedales / cuerpos de agua (vincular a `docs/clases.md`)  
+* **MMU** (*Minimum Mapping Unit*): 0.5 ha — **¿se aplicó el tamizado?** sí (APLICAR_MMU = True en src/config.py)
+* **Alternativa descartada:** Se descartó desagregar Sabana y Pastizal, ya que  para el objeto del mapa (identificar bosques nativos) no resulta relevante. Se descartó suelo de cultivo y suelo desnudo por no contar con muestras suficientes.
 
 ---
 
 ## 3\. Evidencia
 
-### \_\_\_\_-**\-** — Ventanas temporales
+### 2026-10-13-**\-** — Ventanas temporales
 
-* **Ventana 1:** \_\_\_\_\_\_ / \_\_\_\_\_\_  
-* **Ventana 2:** \_\_\_\_\_\_ / \_\_\_\_\_\_  (si no hay segunda ventana, justificar)  
-* **Fundamento fenológico de la elección:**
+* **Ventana 1:** 2026-01-01 / 2026-04-01  
+* **Ventana 2:** 2026-06-01 / 2026-09-01 
+* **Fundamento fenológico de la elección:** 
 
-### \_\_\_\_-**\-** — Sentinel-2 L2A (ESA) y fuente
+### 2026-10-13-**\-** — Sentinel-2 L2A (ESA) y fuente
 
 * **Fuente:** STAC (*SpatioTemporal Asset Catalog*) / Copernicus Data Space / GEE / paquete del docente  
 * **Escenas por ventana y nubosidad:**  
