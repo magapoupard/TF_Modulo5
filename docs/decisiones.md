@@ -51,13 +51,20 @@ Este archivo es la diferencia entre un método documentado y una sucesión de aj
 * **Evidencia / archivo:** src/config.py; data/raw/aoi.geojson; data/raw/rois.geojson
 * **Responsable (humano):** MAGALI POUPARD
 
+### 2026-10-13 — Ajuste de AOI
+
+ * **Ajuste AOI:**  Se corrigió el límite norte del polígono; la superficie pasó de aprox. 10.706 ha a 10.764 ha (calculada en QGIS )
+ * **Fundamento:** Incorporar zona donde en el mapa actual de OTBN, identifica área de bosque nativo, y afinar mejor el límite del área urbanizada.
+ * **Responsable (humano):** MAGALI POUPARD
+
+
 ## 2\. Clases y umbrales
 
 ### 2026-10-01 — Esquema de clases
 
 * **Decisión:** Esquema de 4 clases: 1 humedales y cuerpos de agua, 2 bosque nativo, 3 sabana / pastizal, 4 urbanizado. (vincular a `docs/clases.md`)  
 * **MMU** (*Minimum Mapping Unit*): 0.5 ha — **¿se aplicó el tamizado?** sí (APLICAR_MMU = True en src/config.py)
-* **Fundamento:** El umbral de bosque nativo (cobertura de copas ≥ 20 %, altura ≥ 3 m, superficie ≥ 0,5 ha) y la MMU siguen la Res. COFEMA 230/12 (Pauta 1.2), para que el mapa sea coherente con la definición legal de bosque nativo que rige el OTBN. Estos umbrales son compatibles con el LCCS de la FAO (árboles de 3 m o más con fisonomía arbórea y cobertura abierta o cerrada; Di Gregorio & Jansen, 2005, §3.4.1). Para humedales / cuerpos de agua, se adopta la definición amplia de humedal de la Convención de Ramsar (1971, art. 1.1; Ley 23.919), que incluye cuerpos de agua permanentes y temporales. |
+* **Fundamento:** El umbral de bosque nativo (cobertura de copas ≥ 20 %, altura ≥ 3 m, superficie ≥ 0,5 ha.) y la MMU siguen la Res. COFEMA 230/12 (Pauta 1.2), para que el mapa sea coherente con la definición legal de bosque nativo que rige el OTBN. Estos umbrales son compatibles con el LCCS de la FAO (árboles de 3 m o más con fisonomía arbórea y cobertura abierta o cerrada; Di Gregorio & Jansen, 2005, §3.4.1). Para humedales / cuerpos de agua, se adopta la definición amplia de humedal de la Convención de Ramsar (1971, art. 1.1; Ley 23.919), que incluye cuerpos de agua permanentes y temporales.
 * **Alternativa descartada:** Se descartó desagregar Sabana y Pastizal, ya que  para el objeto del mapa (identificar bosques nativos) no resulta relevante; separar cuerpos de agua permanente y humedal por lo fundamentado arriba y porque  ambas clases debieran corresponderse a zonas no urbanizables a efectos de la normativa municipal; se descartaron las clases suelo de cultivo y suelo desnudo por no contar con muestras suficientes en el AOI.
 * **Evidencia / archivo:** docs/clases.md; src/config.py
 * **Responsable (humano):** MAGALI POUPARD
@@ -65,7 +72,7 @@ Este archivo es la diferencia entre un método documentado y una sucesión de aj
 
 ## 3\. Evidencia
 
-### 2026-10-13-**\-** — Ventanas temporales
+### 2026-10-13 — Ventanas temporales
 
 * **Ventana 1:** 2026-01-01 / 2026-04-01 (verano).
 * **Ventana 2:** 2026-06-01 / 2026-09-01 (invierno).
@@ -74,7 +81,7 @@ Este archivo es la diferencia entre un método documentado y una sucesión de aj
 * **Evidencia / archivo:** src/config.py (`VENTANAS`); docs/clases.md
 * **Responsable (humano):** MAGALI POUPARD
 
-### 2026-10-13-**\-** — Sentinel-2 L2A (ESA) y fuente
+### 2026-10-13 — Sentinel-2 L2A (ESA) y fuente
 
 * **Fuente:** STAC (*SpatioTemporal Asset Catalog*) / Copernicus Data Space / GEE / paquete del docente  
 * **Escenas por ventana y nubosidad:**  

@@ -2,7 +2,7 @@
 
 **Cursante:** MAGALI POUPARD
 **Variante:** A 
-**AOI (área de estudio):** área no urbanizada del ejido municipal de Paso de la Patria, Corrientes **Superficie aprox. (ha):** 10.706 ha
+**AOI (área de estudio):** área no urbanizada del ejido municipal de Paso de la Patria, Corrientes **Superficie aprox. (ha):** 10.764 ha
 **CRS:** EPSG:5347 - POSGAR 2007 / Argentina 5
 **Fecha:** 2026/10/04 
 
@@ -48,9 +48,8 @@ Marcar las que aplican. **Cada clase marcada necesita al menos 4 polígonos de R
 | Ventana temporal 2 (recomendada) | 2026-06-01 / 2026-09-01 | Invierno: pastizales se secan; el bosque nativo conserva el follaje. |
 | Índices | NDVI ☒ NDMI ☒ dNDVI ☒ otro: — | NDVI: separa vegetación de agua y suelo, y distingue niveles de verdor. NDMI: aporta el contenido de humedad de la vegetación, que diferencia la vegetación boscosa del pastizal seco. dNDVI: mide el cambio de verdor entre verano e invierno (contraste fenológico), principal rasgo para separar bosque nativo de vegetación no boscosa. |
 
-**Si trabajan con una sola ventana**, escriban aquí por qué y qué clases quedan potencialmente confundidas:
-
-_______________________________________________________________________
+**Si trabajan con una sola ventana**, escriban aquí por qué y qué clases quedan potencialmente confundidas: No aplica: se trabaja con dos ventanas
+______________________________
 
 ---
 
@@ -65,19 +64,17 @@ _______________________________________________________________________
 - **Viviendas dispersas con jardines o arboleda (quintas, casas de fin de semana) → Sabana / pastizal o Bosque nativo.** Con menos de 30 % de construcciones, o con mucha arboleda, quedan fuera de Urbanizado.
 - **Caminos de tierra → Urbanizado o eliminados por la MMU.** Son angostos; la mayoría desaparece con el tamizado y el resto puede confundirse con construcciones._____________________________________________________
 
----
 
 ## 5. Limitación principal (una línea)
 
 El mapa no mide altura ni distingue árboles de arbustos: la separación entre bosque nativo y sabana / pastizal cerca del umbral del 20 % de cobertura depende de la fotointerpretación de las muestras y debe verificarse en terreno.
-__
 
----
 
-### Referencia
+
+### Referencias
 
 Consejo Federal de Medio Ambiente. (2012). *Resolución N.º 230/2012: Pautas para la consideración, identificación y mapeo de los bosques nativos en el Ordenamiento Territorial de Bosques Nativos*. https://www.mendoza.gov.ar/wp-content/uploads/sites/33/2023/05/Res-230-2012-COFEMA.pdf
 
-Convención de Ramsar, 1971, art. 1.1 o, si querés remarcar su vigencia en Argentina, (Convención de Ramsar, 1971, aprobada por Ley 23.919).
+Convención relativa a los Humedales de Importancia Internacional especialmente como Hábitat de Aves Acuáticas [Convención de Ramsar], 2 de febrero de 1971, art. 1.1.     Ley 23.919 de 1991. Aprueba la Convención en Argentina.
 
 Di Gregorio, A., & Jansen, L. J. M. (2005). *Land Cover Classification System (LCCS): Classification concepts and user manual* (Software version 2). Organización de las Naciones Unidas para la Alimentación y la Agricultura.

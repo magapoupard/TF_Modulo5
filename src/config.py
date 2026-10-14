@@ -15,16 +15,16 @@ OUTPUTS = ROOT / "outputs"
 # ---------------------------------------------------------------------------
 # 1. Identificacion (completar)
 # ---------------------------------------------------------------------------
-CURSANTE = ""                 # apellido y nombre
-AOI_NOMBRE = ""               # nombre del area de estudio
+CURSANTE = MAGALI POUPARD  
+AOI_NOMBRE = Área no urbanizada correspondiente al ejidomunicipal de Paso de la Patria     
 
 # ---------------------------------------------------------------------------
 # 2. Marco espacial
 # ---------------------------------------------------------------------------
-CRS = "EPSG:32721"            # UTM metrico; 32721 = 21S. Ajustar al AOI.
-PIXEL_M = 10.0                # Sentinel-2
-MMU_HA = 0.5                  # Minimum Mapping Unit (unidad minima cartografiable)
-APLICAR_MMU = True            # si True, los parches < MMU se marcan como no cartografiados
+CRS = "EPSG:5347"  # (POSGAR 2007 / Argentina faja 5)
+PIXEL_M = 10.0     # Sentinel-2
+MMU_HA = 0.5       # Minimum Mapping Unit (unidad minima cartografiable)
+APLICAR_MMU = True       # si True, los parches < MMU se marcan como no cartografiados
 
 # ---------------------------------------------------------------------------
 # 3. Variante y clases
@@ -41,7 +41,7 @@ BAND_NAMES = ["B2", "B3", "B4", "B8", "B11", "B12"]
 #                   Debe declararse como limitacion en el resumen.
 #   - 2 ventanas -> contraste fenologico (Variante A) o dos fechas (Variante B).
 # Elegir estaciones contrastantes del MISMO ciclo hidrologico y del ano vigente.
-VENTANAS: list[tuple[str, str]] = []
+VENTANAS: list[tuple[str, str]] = [("2026-01-01", "2026-04-01"), ("2026-06-01", "2026-09-01")]
 # Ejemplo: [("2026-01-01", "2026-03-15"), ("2026-07-01", "2026-09-15")]
 
 MAX_CLOUD = 20                # % de nubosidad maxima por escena
