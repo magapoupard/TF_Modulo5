@@ -104,12 +104,14 @@ Este archivo es la diferencia entre un método documentado y una sucesión de aj
 
 ## 5\. Implementación asistida por IA
 
-### \_\_\_\_-**\-** — Bloques asistidos
+### 2026-10-14 — Bloques asistidos
 
-* **Herramienta / modelo:**  
-* **Bloques en que intervino la IA:** (un bloque por vez)  
-* **Decisiones humanas no delegadas:**  
-* **Verificación aplicada sobre las salidas:**
+* **Etapa:** implementación
+* **Herramienta / modelo:**   Cursor, con el modelo Grok 4.7, para el trabajo sobre el código. Claude (Anthropic) para orientación metodológica, búsqueda de normativa y bibliografía.
+* **Bloques en que intervino la IA:**  - 2026-10-14 — Bloque 1, verificación de AOI y variante (Cursor): recalculó la superficie desde la geometría (10.769,6 ha planimétrica vs. 10.764,4 ha en QGIS), confirmó la variante A y las ventanas, y detectó un error de sintaxis en src/config.py (corregido)
+* **Decisiones humanas no delegadas:** Elección de la variante y del AOI; esquema de clases y umbrales; MMU; sistema de referencia; ventanas temporales; digitalización y etiquetado de las muestras; interpretación de los resultados. 
+* **Verificación aplicada sobre las salidas:** Superficie del AOI contrastada con el cálculo de QGIS y con una verificación independiente; corrección de config.py revisada antes de aceptarla.
+* **Responsable (humano):** MAGALI POUPARD
 
 ---
 

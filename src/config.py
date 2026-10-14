@@ -15,8 +15,8 @@ OUTPUTS = ROOT / "outputs"
 # ---------------------------------------------------------------------------
 # 1. Identificacion (completar)
 # ---------------------------------------------------------------------------
-CURSANTE = MAGALI POUPARD  
-AOI_NOMBRE = Área no urbanizada correspondiente al ejidomunicipal de Paso de la Patria     
+CURSANTE = "MAGALI POUPARD"  
+AOI_NOMBRE = "Área no urbanizada correspondiente al ejidomunicipal de Paso de la Patria"     
 
 # ---------------------------------------------------------------------------
 # 2. Marco espacial
