@@ -4,7 +4,7 @@
 **Variante:** A 
 **AOI (área de estudio):** área no urbanizada del ejido municipal de Paso de la Patria, Corrientes **Superficie aprox. (ha):** 10.764 ha
 **CRS:** EPSG:5347 - POSGAR 2007 / Argentina 5
-**Fecha:** 2026/10/04 
+**Fecha:** 2026/10/04 (última actualización: 2026-10-14)
 
 Completar **antes** de entrenar. Sin este documento la matriz de confusión no tiene interpretación posible: no se sabría qué se estaba distinguiendo.
 
@@ -61,6 +61,7 @@ ______________________________
 - **Formaciones cercanas al 20 % de cobertura de copas → Bosque nativo o Sabana / pastizal.** A 10 m de resolución, árboles dispersos y pasto se mezclan en el mismo píxel; el umbral se aplica al etiquetar las muestras y es esperable confusión en ese límite.
 - **Esteros con vegetación que no se inundaron en ninguna ventana → Sabana / pastizal.** El criterio de humedal depende del nivel del agua en las fechas elegidas; en este caso no fue prioritario elegir ventanas conocidas con altos niveles de agua, ya que se prioriza identificar los bosques.
 - **Cultivos y lotes arados → Sabana / pastizal o Urbanizado.** No tienen clase propia: con vegetación se parecen al pastizal; arados o recién cosechados, al suelo expuesto de áreas urbanizadas.
+- **Forestaciones de pino o eucalipto → Bosque nativo.** Conservan el follaje en invierno y tienen un dNDVI similar al del bosque.
 - **Viviendas dispersas con jardines o arboleda (quintas, casas de fin de semana) → Sabana / pastizal o Bosque nativo.** Con menos de 30 % de construcciones, o con mucha arboleda, quedan fuera de Urbanizado.
 - **Caminos de tierra → Urbanizado o eliminados por la MMU.** Son angostos; la mayoría desaparece con el tamizado y el resto puede confundirse con construcciones._____________________________________________________
 
