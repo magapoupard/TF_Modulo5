@@ -81,12 +81,16 @@ Este archivo es la diferencia entre un método documentado y una sucesión de aj
 * **Evidencia / archivo:** src/config.py (`VENTANAS`); docs/clases.md
 * **Responsable (humano):** MAGALI POUPARD
 
-### 2026-10-13 — Sentinel-2 L2A (ESA) y fuente
+### 2026-10-14 — Sentinel-2 L2A (ESA) vía STAC
 
-* **Fuente:** STAC (*SpatioTemporal Asset Catalog*) / Copernicus Data Space / GEE / paquete del docente  
-* **Escenas por ventana y nubosidad:**  
-* **Composición:** mediana / media  
-* **Índices:** NDVI, NDMI, dNDVI, otros:
+* **Etapa:** evidencia
+* **Fuente:** STAC (*SpatioTemporal Asset Catalog*) de Planetary Computer, colección `sentinel-2-l2a`. Script `python -m src.download_s2_stac`.
+* **Escenas por ventana y nubosidad:** Ventana 1 (2026-01-01 / 2026-04-01): 22 escenas, tile T21JUK, nubosidad entre 0,002 % y 12,9 %. Ventana 2 (2026-06-01 / 2026-09-01): 12 escenas, tile T21JUK, nubosidad entre 0,005 % y 18,2 %. Umbral aplicado: `MAX_CLOUD = 20` (escenas con nubosidad menor a ese valor).
+* **Composición:** mediana de cada ventana.
+* **Archivos:** `data/raw/stack_s2_v1.tif` y `data/raw/stack_s2_v2.tif`. Seis bandas en el orden B2, B3, B4, B8, B11, B12; CRS EPSG:5347; píxel de 10 m; extensión del recuadro del AOI (2089 × 1290).
+* **Índices:** NDVI, NDMI y dNDVI, declarados en `docs/clases.md`. Este bloque no los calculó.
+* **Observación:** Durante la descarga, la verificación de seguridad de la conexión falló en esta computadora. El asistente la desactivó solo para esa descarga para poder completarla. Los datos se verificaron visualmente en QGIS.
+* **Responsable (humano):** MAGALI POUPARD
 
 ---
 
@@ -110,6 +114,7 @@ Este archivo es la diferencia entre un método documentado y una sucesión de aj
 * **Herramienta / modelo:**   Cursor, con el modelo Grok 4.7, para el trabajo sobre el código. Claude (Anthropic) para orientación metodológica, búsqueda de normativa y bibliografía.
 * **Bloques en que intervino la IA:**  - 2026-10-14 — Bloque 1, verificación de AOI y variante (Cursor): recalculó la superficie desde la geometría (10.769,6 ha planimétrica vs. 10.764,4 ha en QGIS), confirmó la variante A y las ventanas, y detectó un error de sintaxis en src/config.py (corregido)
 - 2026-10-14 — Bloque 2, revisión de ventanas temporales (Cursor): confirmó que el contraste verano–invierno sirve para separar bosque nativo de sabana / pastizal y señaló sus límites (umbral del 20 %, altura, inundaciones breves, cultivos y forestaciones). Se decide mantener las ventanas. A partir de esta revisión, se incorporó a docs/clases.md el confusor de forestaciones.
+- 2026-10-14 — Bloque 3, descarga de Sentinel-2 L2A por STAC (Cursor): instaló las dependencias, ejecutó src/download_s2_stac.py con las ventanas predefinidas y redactó la entrada de la sección 3 (revisada y aceptada). Desactivó, solo para esa descarga, la verificación de certificados de la conexión, que fallaba en esta computadora. Verificación: composiciones revisadas en QGIS sobre el AOI; cubren el área y muestran el contraste esperado entre verano e invierno.
 * **Decisiones humanas no delegadas:** Elección de la variante y del AOI; esquema de clases y umbrales; MMU; sistema de referencia; ventanas temporales; digitalización y etiquetado de las muestras; interpretación de los resultados. 
 * **Verificación aplicada sobre las salidas:** Superficie del AOI contrastada con el cálculo de QGIS y con una verificación independiente; corrección de config.py revisada antes de aceptarla.
 * **Responsable (humano):** MAGALI POUPARD
