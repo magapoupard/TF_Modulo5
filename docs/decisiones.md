@@ -119,6 +119,14 @@ Este archivo es la diferencia entre un método documentado y una sucesión de aj
 * **Evidencia / archivo:** `src/config.py`; `src/features.py`
 * **Responsable (humano):** MAGALI POUPARD
 
+### 2026-10-14 — Random Forest con índices corregidos
+
+* **Etapa:** implementación
+* **Decisión:** Se volvió a entrenar el Random Forest (200 árboles, `class_weight="balanced_subsample"`, semilla 42) con el desplazamiento de 1000 y el piso de reflectancia en 0. La MMU de 0,5 ha se aplicó. Dentro del AOI se removieron 146.043 píxeles por parches menores a 50 píxeles.
+* **Superficie por conteo de píxeles dentro del AOI:** clase 1, 798,16 ha; clase 2, 2.061,53 ha; clase 3, 5.709,57 ha; clase 4, 738,90 ha; no cartografiado (`-1`), 1.461,43 ha. No es la superficie ajustada por error.
+* **Evidencia / archivo:** `data/processed/mapa_prediccion.tif`; `outputs/resumen_TF_2026-10-14.json`
+* **Responsable (humano):** MAGALI POUPARD
+
 ---
 
 ## 4\. Muestreo y validación
@@ -145,6 +153,7 @@ Este archivo es la diferencia entre un método documentado y una sucesión de aj
 - 2026-10-14 — Bloque 4, revisión src/ingest.py según PIPELINE (Cursor): El archivo ya cumplía lo indicado, no fue necesario modificarlo y no se tocaron los datos de data/raw. Informó que se leen correctamente el AOI, los 29 polígonos de muestra (6 de humedales, 7 de bosque nativo, 11 de sabana / pastizal y 5 de urbanizado) y las dos imágenes, todos en EPSG:5347.
 - 2026-10-14 —Bloque 5 (índices): Le pedí a Cursor calcular NDVI, NDMI y dNDVI. Según su respuesta, se generaron 13 capas. Le pregunté por los píxeles con valor 0 y respondió que son muy pocos dentro del AOI.
 - 2026-10-14 — Corrección del bloque 5: Al revisar los rangos de los índices con asistencia de Claude, el NDVI máximo de verano (0,69) resultó más bajo de lo esperable. Le consulté a Cursor, que confirmó que las 34 escenas tienen línea de procesamiento 05.11 o 05.12 y que el desplazamiento de 1000 no se restaba. Le pedí restarlo antes de calcular los índices. Según su respuesta, al restar quedaban valores negativos, sobre todo en agua fuera del AOI, que hacían salir los índices de −1 a 1; le pedí llevarlos a 0. No se modificaron los datos originales. El mapa y el resumen del bloque 6 provisorio quedaron incluidos por error en el commit del bloque 5; se reemplazan al volver a ejecutar el bloque 6
+- 2026-10-14 — Bloque 6 (modelo y MMU, repetido): Le pedí a Cursor volver a ejecutar el modelo con los índices corregidos y los parámetros de config.py. Según su respuesta, dentro del AOI quedaron 100 píxeles sin dato, que el modelo no clasifica, y la MMU dejó sin clase 1.460 ha (14 % del AOI). Las superficies por conteo de píxeles quedan para ajustar en el bloque 7.
 * **Decisiones humanas no delegadas:** Elección de la variante y del AOI; esquema de clases y umbrales; MMU; sistema de referencia; ventanas temporales; digitalización y etiquetado de las muestras; interpretación de los resultados. 
 * **Verificación aplicada sobre las salidas:** Superficie del AOI contrastada con el cálculo de QGIS y con una verificación independiente; corrección de config.py revisada antes de aceptarla.
 * **Responsable (humano):** MAGALI POUPARD
