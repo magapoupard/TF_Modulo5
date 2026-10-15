@@ -1,0 +1,176 @@
+{
+  "proyecto": "TF_Modulo5_Monitoreo",
+  "cursante": "MAGALI POUPARD",
+  "fecha": "2026-10-15",
+  "variante": "A",
+  "aoi": "Área no urbanizada correspondiente al ejidomunicipal de Paso de la Patria",
+  "crs": "EPSG:5347",
+  "mmu_ha": 0.5,
+  "mmu": {
+    "aplicada": true,
+    "min_px": 50,
+    "px_removidos": 368893
+  },
+  "insumos": {
+    "stack_v1": "C:\\Users\\Admin\\Documents\\1.DIPLOMATURA IA Y SIG\\MODULO 5\\TF_Modulo5-20260925T212212Z-1-001\\TF_Modulo5\\data\\raw\\stack_s2_v1.tif",
+    "stack_v2": "C:\\Users\\Admin\\Documents\\1.DIPLOMATURA IA Y SIG\\MODULO 5\\TF_Modulo5-20260925T212212Z-1-001\\TF_Modulo5\\data\\raw\\stack_s2_v2.tif",
+    "rois": "C:\\Users\\Admin\\Documents\\1.DIPLOMATURA IA Y SIG\\MODULO 5\\TF_Modulo5-20260925T212212Z-1-001\\TF_Modulo5\\data\\raw\\rois.geojson",
+    "aoi_path": "C:\\Users\\Admin\\Documents\\1.DIPLOMATURA IA Y SIG\\MODULO 5\\TF_Modulo5-20260925T212212Z-1-001\\TF_Modulo5\\data\\raw\\aoi.geojson",
+    "ventanas": [
+      [
+        "2026-01-01",
+        "2026-04-01"
+      ],
+      [
+        "2026-06-01",
+        "2026-09-01"
+      ]
+    ],
+    "multitemporal": true
+  },
+  "parametros": {
+    "n_trees": 200,
+    "random_state": 42,
+    "frac_val": 0.3,
+    "min_dist_val_m": 200.0,
+    "max_px_train_por_roi": 300,
+    "max_px_val_por_roi": 5,
+    "features": [
+      "B2_v1",
+      "B3_v1",
+      "B4_v1",
+      "B8_v1",
+      "NDVI_v1",
+      "NDMI_v1",
+      "B2_v2",
+      "B3_v2",
+      "B4_v2",
+      "B8_v2",
+      "NDVI_v2",
+      "NDMI_v2",
+      "dNDVI"
+    ]
+  },
+  "muestreo": {
+    "n_rois_total": 29,
+    "n_rois_train": 20,
+    "n_rois_val": 9,
+    "n_rois_descartados": 0,
+    "n_rois_sin_pixeles": 0,
+    "n_px_train": 4754,
+    "n_px_val": 45,
+    "independencia": "distancia_minima"
+  },
+  "metricas": {
+    "labels": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "confusion_matrix": [
+      [
+        4,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        10,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        15,
+        3
+      ],
+      [
+        4,
+        0,
+        0,
+        7
+      ]
+    ],
+    "orientacion": "filas = clase del mapa; columnas = clase de referencia",
+    "oa": 0.8,
+    "user_accuracy": [
+      1.0,
+      0.9090909090909091,
+      0.7894736842105263,
+      0.6363636363636364
+    ],
+    "producer_accuracy": [
+      0.4,
+      1.0,
+      1.0,
+      0.7
+    ],
+    "n_val": 45,
+    "nota": "Sin soporte para una clase se informa null; nunca se completa con un valor inventado."
+  },
+  "areas_ha": {
+    "1": {
+      "area_ajustada_ha": 1554.7664114832537,
+      "ic95_ha": [
+        826.5011336045018,
+        2283.0316893620056
+      ],
+      "se_ha": 371.56391728507754,
+      "area_conteo_pixeles_ha": 798.16,
+      "nota": null
+    },
+    "2": {
+      "area_ajustada_ha": 1874.1181818181817,
+      "ic95_ha": [
+        1506.7910181818181,
+        2241.4453454545455
+      ],
+      "se_ha": 187.4118181818182,
+      "area_conteo_pixeles_ha": 2061.53,
+      "nota": null
+    },
+    "3": {
+      "area_ajustada_ha": 4507.555263157895,
+      "ic95_ha": [
+        3432.216639648535,
+        5582.893886667254
+      ],
+      "se_ha": 548.6421548517142,
+      "area_conteo_pixeles_ha": 5709.57,
+      "nota": null
+    },
+    "4": {
+      "area_ajustada_ha": 1371.7201435406698,
+      "ic95_ha": [
+        384.99949035447935,
+        2358.4407967268603
+      ],
+      "se_ha": 503.42890468683186,
+      "area_conteo_pixeles_ha": 738.9,
+      "nota": null
+    }
+  },
+  "outputs": [
+    "C:\\Users\\Admin\\Documents\\1.DIPLOMATURA IA Y SIG\\MODULO 5\\TF_Modulo5-20260925T212212Z-1-001\\TF_Modulo5\\data\\processed\\mapa_prediccion.tif"
+  ],
+  "asistencia_ia": {
+    "herramienta": "",
+    "etapas": [],
+    "decisiones_humanas": [],
+    "verificacion": []
+  },
+  "limitaciones": [
+    "Validacion espacial minima: el desempeno puede degradarse fuera del AOI.",
+    "Superficie estimada con el estimador ajustado por error de Olofsson et al. (2014); su validez depende del tamano de la muestra de validacion por clase.",
+    "Los pesos del estimador son los pixeles de cada clase dentro del AOI. El no cartografiado (-1) no entra en esos pesos.",
+    "La matriz compara la prediccion del clasificador en los pixeles de validacion, hasta 5 por poligono. Esos pixeles se tratan como muestras independientes."
+  ],
+  "referencias_clave": [
+    "Spataro (2026) Modulo 5",
+    "Belgiu & Dragut (2016)",
+    "Olofsson et al. (2014)"
+  ]
+}

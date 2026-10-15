@@ -154,6 +154,7 @@ Este archivo es la diferencia entre un método documentado y una sucesión de aj
 - 2026-10-14 —Bloque 5 (índices): Le pedí a Cursor calcular NDVI, NDMI y dNDVI. Según su respuesta, se generaron 13 capas. Le pregunté por los píxeles con valor 0 y respondió que son muy pocos dentro del AOI.
 - 2026-10-14 — Corrección del bloque 5: Al revisar los rangos de los índices con asistencia de Claude, el NDVI máximo de verano (0,69) resultó más bajo de lo esperable. Le consulté a Cursor, que confirmó que las 34 escenas tienen línea de procesamiento 05.11 o 05.12 y que el desplazamiento de 1000 no se restaba. Le pedí restarlo antes de calcular los índices. Según su respuesta, al restar quedaban valores negativos, sobre todo en agua fuera del AOI, que hacían salir los índices de −1 a 1; le pedí llevarlos a 0. No se modificaron los datos originales. El mapa y el resumen del bloque 6 provisorio quedaron incluidos por error en el commit del bloque 5; se reemplazan al volver a ejecutar el bloque 6
 - 2026-10-14 — Bloque 6 (modelo y MMU, repetido): Le pedí a Cursor volver a ejecutar el modelo con los índices corregidos y los parámetros de config.py. Según su respuesta, dentro del AOI quedaron 100 píxeles sin dato, que el modelo no clasifica, y la MMU dejó sin clase 1.460 ha (14 % del AOI). Las superficies por conteo de píxeles quedan para ajustar en el bloque 7.
+- 2026-10-15 —Bloque 7 (matriz y superficie ajustada): Le pedí a Cursor calcular la matriz de confusión y la superficie ajustada por error. Según su respuesta, la exactitud global es 0,80 (45 píxeles en 9 polígonos de validación) y el bosque nativo ajustado es 1.874 ha (IC 95 %: 1.507–2.241 ha). Claude verificó las cuentas con la fórmula de Olofsson et al. (2014) y coinciden.
 * **Decisiones humanas no delegadas:** Elección de la variante y del AOI; esquema de clases y umbrales; MMU; sistema de referencia; ventanas temporales; digitalización y etiquetado de las muestras; interpretación de los resultados. 
 * **Verificación aplicada sobre las salidas:** Superficie del AOI contrastada con el cálculo de QGIS y con una verificación independiente; corrección de config.py revisada antes de aceptarla.
 * **Responsable (humano):** MAGALI POUPARD
@@ -162,14 +163,16 @@ Este archivo es la diferencia entre un método documentado y una sucesión de aj
 
 ## 6\. Validación y superficie
 
-### \_\_\_\_-**\-** — Resultados
+### 2026-10-15 — Resultados
 
-* **OA** (*overall accuracy*, exactitud global):  
-* **Exactitud del usuario y del productor por clase:**  
-* **Superficie ajustada por clase (ha) \+ IC 95 %:**  
-* **Superficie por conteo de píxeles (ha):**  
-* **Diferencia entre ambas y su interpretación:**  
-* **Lo que el mapa NO afirma:**
+* **OA** (*overall accuracy*, exactitud global): 0,80 (36/45 píxeles de validación).
+* **Exactitud del usuario y del productor por clase:** Usuario: clase 1 = 1,00 (4/4); clase 2 = 0,91 (10/11); clase 3 = 0,79 (15/19); clase 4 = 0,64 (7/11). Productor: clase 1 = 0,40 (4/10); clase 2 = 1,00 (10/10); clase 3 = 1,00 (15/15); clase 4 = 0,70 (7/10). Matriz con filas = mapa y columnas = referencia: [[4, 0, 0, 0], [1, 10, 0, 0], [1, 0, 15, 3], [4, 0, 0, 7]].
+* **Superficie ajustada por clase (ha) + IC 95 %:** Dentro del área mapeada del AOI (9.308,16 ha; el no cartografiado no entra en los pesos). Clase 1: 1.554,8 ha (826,5–2.283,0). Clase 2: 1.874,1 ha (1.506,8–2.241,4). Clase 3: 4.507,6 ha (3.432,2–5.582,9). Clase 4: 1.371,7 ha (385,0–2.358,4).
+* **Superficie por conteo de píxeles (ha):** Clase 1: 798,16. Clase 2: 2.061,53. Clase 3: 5.709,57. Clase 4: 738,90. No cartografiado: 1.461,43, fuera del estimador.
+* **Diferencia entre ambas y su interpretación:** El ajuste sube humedales y urbanizado, y baja bosque y sabana / pastizal. De 10 píxeles de referencia de humedal, 6 quedaron en otra clase del mapa (1 en bosque, 1 en sabana / pastizal y 4 en urbanizado). De 10 píxeles de referencia de urbanizado, 3 quedaron en sabana / pastizal, que es la clase con más peso en el mapa. Para el bosque nativo, el conteo de píxeles (2.061,5 ha) queda por encima de la superficie ajustada (1.874,1 ha): el mapa tiende a sobreestimar levemente el bosque.
+* **Lo que el mapa NO afirma:** No asigna categorías de conservación del OTBN. No mide altura ni distingue árboles de arbustos. No informa superficie del 13,6 % del AOI que quedó sin clase por la MMU (1.461,43 ha). No valida forestaciones: ningún polígono de la capa roi se dibujó sobre plantaciones. Los intervalos tratan como independientes 45 píxeles de solo 9 polígonos (5 por polígono). La clase 1 del mapa solo tiene 4 píxeles de validación. 
+* **Evidencia / archivo:** `outputs/resumen_TF_2026-10-15.json`
+* **Responsable (humano):** MAGALI POUPARD
 
 ---
 

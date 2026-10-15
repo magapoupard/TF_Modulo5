@@ -17,7 +17,7 @@ from rasterio.features import geometry_mask
 
 from . import config
 from .features import combinar_ventanas
-from .ingest import open_stack, read_rois
+from .ingest import open_stack, read_aoi, read_rois
 from .model import NODATA, aplicar_mmu, predict_map, train_rf
 from .validate import area_ajustada, matriz_confusion, spatial_split
 
@@ -117,7 +117,16 @@ def main():
         "nota": "Sin muestras de validacion independientes: no se informan exactitudes.",
     }
     areas = {}
-    px_por_clase = {c: int((pred == c).sum()) for c in labels}
+    # Los pesos de Olofsson son la proporcion de cada clase en el area de
+    # estudio. El raster cubre el recuadro del stack; se cuentan solo los
+    # pixeles del AOI. El no cartografiado (-1) no entra en los pesos.
+    dentro = geometry_mask(
+        [read_aoi().geometry.iloc[0]],
+        out_shape=pred.shape,
+        transform=transform,
+        invert=True,
+    )
+    px_por_clase = {c: int(((pred == c) & dentro).sum()) for c in labels}
 
     if x_va:
         x_va_a, y_va_a = np.vstack(x_va), np.concatenate(y_va)
@@ -147,6 +156,10 @@ def main():
         "Validacion espacial minima: el desempeno puede degradarse fuera del AOI.",
         "Superficie estimada con el estimador ajustado por error de Olofsson et al. (2014); "
         "su validez depende del tamano de la muestra de validacion por clase.",
+        "Los pesos del estimador son los pixeles de cada clase dentro del AOI. "
+        "El no cartografiado (-1) no entra en esos pesos.",
+        "La matriz compara la prediccion del clasificador en los pixeles de validacion, "
+        "hasta 5 por poligono. Esos pixeles se tratan como muestras independientes.",
     ]
     sin_soporte = [k for k, v in areas.items() if v.get("area_ajustada_ha") is None]
     if sin_soporte:
