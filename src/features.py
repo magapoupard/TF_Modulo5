@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import numpy as np
 
-BANDAS_REQUERIDAS = ("B2", "B3", "B4", "B8")
+BANDAS_REQUERIDAS = ("B2", "B3", "B4", "B8", "B11")
 
 
 def _norm_diff(a: np.ndarray, b: np.ndarray) -> np.ndarray:
@@ -25,16 +25,11 @@ def ndmi(nir: np.ndarray, swir: np.ndarray) -> np.ndarray:
     return _norm_diff(nir, swir)
 
 
-def _swir(bands: dict[str, np.ndarray]):
-    if "B11" in bands:
-        return bands["B11"]
-    if "B12" in bands:
-        return bands["B12"]
-    return None
-
-
 def features_ventana(bands: dict[str, np.ndarray], sufijo: str = ""):
-    """Devuelve (arreglo apilado, nombres) para una ventana temporal."""
+    """Devuelve (arreglo apilado, nombres) para una ventana temporal.
+
+    NDMI usa B11 (SWIR1). B12 no entra: no esta justificado en docs/clases.md.
+    """
     faltan = [k for k in BANDAS_REQUERIDAS if k not in bands]
     if faltan:
         raise KeyError(f"Faltan bandas requeridas: {faltan}")
@@ -46,10 +41,8 @@ def features_ventana(bands: dict[str, np.ndarray], sufijo: str = ""):
     capas.append(v)
     nombres.append(f"NDVI{sufijo}")
 
-    swir = _swir(bands)
-    if swir is not None:
-        capas.append(ndmi(bands["B8"], swir))
-        nombres.append(f"NDMI{sufijo}")
+    capas.append(ndmi(bands["B8"], bands["B11"]))
+    nombres.append(f"NDMI{sufijo}")
 
     return np.stack(capas, axis=0), nombres
 

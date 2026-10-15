@@ -92,6 +92,15 @@ Este archivo es la diferencia entre un método documentado y una sucesión de aj
 * **Observación:** Durante la descarga, la verificación de seguridad de la conexión falló en esta computadora. El asistente la desactivó solo para esa descarga para poder completarla. Los datos se verificaron visualmente en QGIS.
 * **Responsable (humano):** MAGALI POUPARD
 
+### 2026-10-14 — Predictores
+
+* **Etapa:** implementación
+* **Decisión:** Por ventana: B2, B3, B4, B8, NDVI y NDMI. Con las dos ventanas se agrega dNDVI = NDVI de la ventana 2 menos NDVI de la ventana 1. NDVI = (B8 − B4) / (B8 + B4). NDMI = (B8 − B11) / (B8 + B11). Si el denominador es 0, el píxel queda como NaN.
+* **Fundamento:** Son los índices declarados en `docs/clases.md`. NDVI separa vegetación de agua y suelo. NDMI aporta humedad para diferenciar bosque de pastizal seco. dNDVI es el contraste fenológico entre invierno y verano.
+* **Alternativa descartada:** Agregar otros índices espectrales sin una justificación específica para separar las clases del AOI.
+* **Evidencia / archivo:** `src/features.py`
+* **Responsable (humano):** MAGALI POUPARD
+
 ---
 
 ## 4\. Muestreo y validación
@@ -116,6 +125,7 @@ Este archivo es la diferencia entre un método documentado y una sucesión de aj
 - 2026-10-14 — Bloque 2, revisión de ventanas temporales (Cursor): confirmó que el contraste verano–invierno sirve para separar bosque nativo de sabana / pastizal y señaló sus límites (umbral del 20 %, altura, inundaciones breves, cultivos y forestaciones). Se decide mantener las ventanas. A partir de esta revisión, se incorporó a docs/clases.md el confusor de forestaciones.
 - 2026-10-14 — Bloque 3, descarga de Sentinel-2 L2A por STAC (Cursor): instaló las dependencias, ejecutó src/download_s2_stac.py con las ventanas predefinidas y redactó la entrada de la sección 3 (revisada y aceptada). Desactivó, solo para esa descarga, la verificación de certificados de la conexión, que fallaba en esta computadora. Verificación: composiciones revisadas en QGIS sobre el AOI; cubren el área y muestran el contraste esperado entre verano e invierno.
 - 2026-10-14 — Bloque 4, revisión src/ingest.py según PIPELINE (Cursor): El archivo ya cumplía lo indicado, no fue necesario modificarlo y no se tocaron los datos de data/raw. Informó que se leen correctamente el AOI, los 29 polígonos de muestra (6 de humedales, 7 de bosque nativo, 11 de sabana / pastizal y 5 de urbanizado) y las dos imágenes, todos en EPSG:5347.
+Bloque 5 (índices): Le pedí a Cursor calcular NDVI, NDMI y dNDVI. Según su respuesta, se generaron 13 capas. Le pregunté por los píxeles con valor 0 y respondió que son muy pocos dentro del AOI.
 * **Decisiones humanas no delegadas:** Elección de la variante y del AOI; esquema de clases y umbrales; MMU; sistema de referencia; ventanas temporales; digitalización y etiquetado de las muestras; interpretación de los resultados. 
 * **Verificación aplicada sobre las salidas:** Superficie del AOI contrastada con el cálculo de QGIS y con una verificación independiente; corrección de config.py revisada antes de aceptarla.
 * **Responsable (humano):** MAGALI POUPARD

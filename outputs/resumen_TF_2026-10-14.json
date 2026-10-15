@@ -1,0 +1,174 @@
+{
+  "proyecto": "TF_Modulo5_Monitoreo",
+  "cursante": "MAGALI POUPARD",
+  "fecha": "2026-10-14",
+  "variante": "A",
+  "aoi": "Área no urbanizada correspondiente al ejidomunicipal de Paso de la Patria",
+  "crs": "EPSG:5347",
+  "mmu_ha": 0.5,
+  "mmu": {
+    "aplicada": true,
+    "min_px": 50,
+    "px_removidos": 317039
+  },
+  "insumos": {
+    "stack_v1": "C:\\Users\\Admin\\Documents\\1.DIPLOMATURA IA Y SIG\\MODULO 5\\TF_Modulo5-20260925T212212Z-1-001\\TF_Modulo5\\data\\raw\\stack_s2_v1.tif",
+    "stack_v2": "C:\\Users\\Admin\\Documents\\1.DIPLOMATURA IA Y SIG\\MODULO 5\\TF_Modulo5-20260925T212212Z-1-001\\TF_Modulo5\\data\\raw\\stack_s2_v2.tif",
+    "rois": "C:\\Users\\Admin\\Documents\\1.DIPLOMATURA IA Y SIG\\MODULO 5\\TF_Modulo5-20260925T212212Z-1-001\\TF_Modulo5\\data\\raw\\rois.geojson",
+    "aoi_path": "C:\\Users\\Admin\\Documents\\1.DIPLOMATURA IA Y SIG\\MODULO 5\\TF_Modulo5-20260925T212212Z-1-001\\TF_Modulo5\\data\\raw\\aoi.geojson",
+    "ventanas": [
+      [
+        "2026-01-01",
+        "2026-04-01"
+      ],
+      [
+        "2026-06-01",
+        "2026-09-01"
+      ]
+    ],
+    "multitemporal": true
+  },
+  "parametros": {
+    "n_trees": 200,
+    "random_state": 42,
+    "frac_val": 0.3,
+    "min_dist_val_m": 200.0,
+    "max_px_train_por_roi": 300,
+    "max_px_val_por_roi": 5,
+    "features": [
+      "B2_v1",
+      "B3_v1",
+      "B4_v1",
+      "B8_v1",
+      "NDVI_v1",
+      "NDMI_v1",
+      "B2_v2",
+      "B3_v2",
+      "B4_v2",
+      "B8_v2",
+      "NDVI_v2",
+      "NDMI_v2",
+      "dNDVI"
+    ]
+  },
+  "muestreo": {
+    "n_rois_total": 29,
+    "n_rois_train": 20,
+    "n_rois_val": 9,
+    "n_rois_descartados": 0,
+    "n_rois_sin_pixeles": 0,
+    "n_px_train": 4754,
+    "n_px_val": 45,
+    "independencia": "distancia_minima"
+  },
+  "metricas": {
+    "labels": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "confusion_matrix": [
+      [
+        4,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        10,
+        0,
+        0
+      ],
+      [
+        3,
+        0,
+        15,
+        3
+      ],
+      [
+        3,
+        0,
+        0,
+        7
+      ]
+    ],
+    "orientacion": "filas = clase del mapa; columnas = clase de referencia",
+    "oa": 0.8,
+    "user_accuracy": [
+      1.0,
+      1.0,
+      0.7142857142857143,
+      0.7
+    ],
+    "producer_accuracy": [
+      0.4,
+      1.0,
+      1.0,
+      0.7
+    ],
+    "n_val": 45,
+    "nota": "Sin soporte para una clase se informa null; nunca se completa con un valor inventado."
+  },
+  "areas_ha": {
+    "1": {
+      "area_ajustada_ha": 7551.089428571428,
+      "ic95_ha": [
+        5435.512045700811,
+        9666.666811442044
+      ],
+      "se_ha": 1079.3762157503145,
+      "area_conteo_pixeles_ha": 4706.0,
+      "nota": null
+    },
+    "2": {
+      "area_ajustada_ha": 3779.7799999999997,
+      "ic95_ha": [
+        3779.7799999999997,
+        3779.7799999999997
+      ],
+      "se_ha": 0.0,
+      "area_conteo_pixeles_ha": 3779.78,
+      "nota": null
+    },
+    "3": {
+      "area_ajustada_ha": 7920.407142857143,
+      "ic95_ha": [
+        5724.982291471863,
+        10115.831994242424
+      ],
+      "se_ha": 1120.1147200945306,
+      "area_conteo_pixeles_ha": 11088.57,
+      "nota": null
+    },
+    "4": {
+      "area_ajustada_ha": 4526.4334285714285,
+      "ic95_ha": [
+        2410.856045700812,
+        6642.010811442045
+      ],
+      "se_ha": 1079.3762157503147,
+      "area_conteo_pixeles_ha": 4203.36,
+      "nota": null
+    }
+  },
+  "outputs": [
+    "C:\\Users\\Admin\\Documents\\1.DIPLOMATURA IA Y SIG\\MODULO 5\\TF_Modulo5-20260925T212212Z-1-001\\TF_Modulo5\\data\\processed\\mapa_prediccion.tif"
+  ],
+  "asistencia_ia": {
+    "herramienta": "",
+    "etapas": [],
+    "decisiones_humanas": [],
+    "verificacion": []
+  },
+  "limitaciones": [
+    "Validacion espacial minima: el desempeno puede degradarse fuera del AOI.",
+    "Superficie estimada con el estimador ajustado por error de Olofsson et al. (2014); su validez depende del tamano de la muestra de validacion por clase."
+  ],
+  "referencias_clave": [
+    "Spataro (2026) Modulo 5",
+    "Belgiu & Dragut (2016)",
+    "Olofsson et al. (2014)"
+  ]
+}
