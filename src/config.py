@@ -47,6 +47,19 @@ VENTANAS: list[tuple[str, str]] = [("2026-01-01", "2026-04-01"), ("2026-06-01", 
 MAX_CLOUD = 20                # % de nubosidad maxima por escena
 COMPOSITE = "median"          # composicion dentro de cada ventana: "median" | "mean"
 
+# Desplazamiento del numero digital (DN) de Sentinel-2 L2A.
+# Desde la linea de procesamiento 04.00, la ESA define BOA_ADD_OFFSET = -1000:
+# el GeoTIFF guarda DN = reflectancia * 10000 + 1000, y el valor para los
+# indices es DN - 1000. Las 34 escenas de este TF tienen s2:processing_baseline
+# 05.11 o 05.12. features.py resta S2_DN_OFFSET; no reescribe data/raw.
+# El factor 10000 se cancela en NDVI y NDMI, y no se aplica.
+# Un DN igual a 0 en el archivo es sin dato: pasa a NaN antes de restar.
+S2_DN_OFFSET = 1000
+# Piso de la reflectancia despues de restar S2_DN_OFFSET. Un DN entre 1 y 999
+# queda negativo; la reflectancia de superficie no puede ser negativa y se
+# lleva a este piso antes de los indices. El DN 0 sigue siendo NaN.
+S2_REFLECTANCIA_MIN = 0
+
 # ---------------------------------------------------------------------------
 # 5. Modelo
 # ---------------------------------------------------------------------------

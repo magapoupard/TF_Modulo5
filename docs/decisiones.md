@@ -101,6 +101,24 @@ Este archivo es la diferencia entre un método documentado y una sucesión de aj
 * **Evidencia / archivo:** `src/features.py`
 * **Responsable (humano):** MAGALI POUPARD
 
+### 2026-10-14 — Desplazamiento del DN de Sentinel-2 L2A
+
+* **Etapa:** implementación
+* **Decisión:** `S2_DN_OFFSET = 1000` en `src/config.py`. Antes de NDVI, NDMI y dNDVI se resta 1000 a cada banda. Un DN igual a 0 queda como NaN. Los GeoTIFF de `data/raw` no se modifican.
+* **Fundamento:** Las 34 escenas usadas tienen `s2:processing_baseline` 05.11 (8 escenas, ventana de verano) o 05.12 (26 escenas). Desde la línea 04.00, la ESA define `BOA_ADD_OFFSET = -1000`: el archivo guarda el número digital más 1000. El factor 10000 de la reflectancia se cancela en el cociente y no se aplica.
+* **Alternativa descartada:** Calcular los índices con el número digital sin restar el desplazamiento.
+* **Evidencia / archivo:** `src/config.py`; `src/features.py`
+* **Responsable (humano):** MAGALI POUPARD
+
+### 2026-10-14 — Piso de reflectancia en cero
+
+* **Etapa:** implementación
+* **Decisión:** `S2_REFLECTANCIA_MIN = 0`. Después de restar el desplazamiento, todo valor de banda negativo se lleva a 0 antes de NDVI, NDMI y dNDVI. El DN 0 del archivo sigue siendo NaN.
+* **Fundamento:** La reflectancia de superficie no puede ser negativa. Un DN entre 1 y 999 queda negativo al restar 1000.
+* **Alternativa descartada:** Calcular los índices con valores de banda negativos, que dan resultados fuera del intervalo de −1 a 1.
+* **Evidencia / archivo:** `src/config.py`; `src/features.py`
+* **Responsable (humano):** MAGALI POUPARD
+
 ---
 
 ## 4\. Muestreo y validación
@@ -125,7 +143,8 @@ Este archivo es la diferencia entre un método documentado y una sucesión de aj
 - 2026-10-14 — Bloque 2, revisión de ventanas temporales (Cursor): confirmó que el contraste verano–invierno sirve para separar bosque nativo de sabana / pastizal y señaló sus límites (umbral del 20 %, altura, inundaciones breves, cultivos y forestaciones). Se decide mantener las ventanas. A partir de esta revisión, se incorporó a docs/clases.md el confusor de forestaciones.
 - 2026-10-14 — Bloque 3, descarga de Sentinel-2 L2A por STAC (Cursor): instaló las dependencias, ejecutó src/download_s2_stac.py con las ventanas predefinidas y redactó la entrada de la sección 3 (revisada y aceptada). Desactivó, solo para esa descarga, la verificación de certificados de la conexión, que fallaba en esta computadora. Verificación: composiciones revisadas en QGIS sobre el AOI; cubren el área y muestran el contraste esperado entre verano e invierno.
 - 2026-10-14 — Bloque 4, revisión src/ingest.py según PIPELINE (Cursor): El archivo ya cumplía lo indicado, no fue necesario modificarlo y no se tocaron los datos de data/raw. Informó que se leen correctamente el AOI, los 29 polígonos de muestra (6 de humedales, 7 de bosque nativo, 11 de sabana / pastizal y 5 de urbanizado) y las dos imágenes, todos en EPSG:5347.
-Bloque 5 (índices): Le pedí a Cursor calcular NDVI, NDMI y dNDVI. Según su respuesta, se generaron 13 capas. Le pregunté por los píxeles con valor 0 y respondió que son muy pocos dentro del AOI.
+- 2026-10-14 —Bloque 5 (índices): Le pedí a Cursor calcular NDVI, NDMI y dNDVI. Según su respuesta, se generaron 13 capas. Le pregunté por los píxeles con valor 0 y respondió que son muy pocos dentro del AOI.
+- 2026-10-14 — Corrección del bloque 5: Al revisar los rangos de los índices con asistencia de Claude, el NDVI máximo de verano (0,69) resultó más bajo de lo esperable. Le consulté a Cursor, que confirmó que las 34 escenas tienen línea de procesamiento 05.11 o 05.12 y que el desplazamiento de 1000 no se restaba. Le pedí restarlo antes de calcular los índices. Según su respuesta, al restar quedaban valores negativos, sobre todo en agua fuera del AOI, que hacían salir los índices de −1 a 1; le pedí llevarlos a 0. No se modificaron los datos originales. El mapa y el resumen del bloque 6 provisorio quedaron incluidos por error en el commit del bloque 5; se reemplazan al volver a ejecutar el bloque 6
 * **Decisiones humanas no delegadas:** Elección de la variante y del AOI; esquema de clases y umbrales; MMU; sistema de referencia; ventanas temporales; digitalización y etiquetado de las muestras; interpretación de los resultados. 
 * **Verificación aplicada sobre las salidas:** Superficie del AOI contrastada con el cálculo de QGIS y con una verificación independiente; corrección de config.py revisada antes de aceptarla.
 * **Responsable (humano):** MAGALI POUPARD
