@@ -152,8 +152,9 @@ Este archivo es la diferencia entre un método documentado y una sucesión de aj
 ### 2026-10-14 — Bloques asistidos
 
 * **Etapa:** implementación
-* **Herramienta / modelo:**   Cursor, con el modelo Grok 4.7, para el trabajo sobre el código. Claude (Anthropic) para orientación metodológica, búsqueda de normativa, bibliografía y revisión de resultados,
-* **Bloques en que intervino la IA:**  - 2026-10-14 — Bloque 1, verificación de AOI y variante (Cursor): recalculó la superficie desde la geometría (10.769,6 ha planimétrica vs. 10.764,4 ha en QGIS), confirmó la variante A y las ventanas, y detectó un error de sintaxis en src/config.py (corregido)
+* **Herramienta / modelo:**   Cursor, con el modelo Grok 4.7, para el trabajo sobre el código. Claude (Anthropic) para orientación metodológica, búsqueda de normativa, bibliografía y revisión de resultados.
+* **Bloques en que intervino la IA:**  
+- 2026-10-14 — Bloque 1, verificación de AOI y variante (Cursor): recalculó la superficie desde la geometría (10.769,6 ha planimétrica vs. 10.764,4 ha en QGIS), confirmó la variante A y las ventanas, y detectó un error de sintaxis en src/config.py (corregido)
 - 2026-10-14 — Bloque 2, revisión de ventanas temporales (Cursor): confirmó que el contraste verano–invierno sirve para separar bosque nativo de sabana / pastizal y señaló sus límites (umbral del 20 %, altura, inundaciones breves, cultivos y forestaciones). Se decide mantener las ventanas. A partir de esta revisión, se incorporó a docs/clases.md el confusor de forestaciones.
 - 2026-10-14 — Bloque 3, descarga de Sentinel-2 L2A por STAC (Cursor): instaló las dependencias, ejecutó src/download_s2_stac.py con las ventanas predefinidas y redactó la entrada de la sección 3 (revisada y aceptada). Desactivó, solo para esa descarga, la verificación de certificados de la conexión, que fallaba en esta computadora. Verificación: composiciones revisadas en QGIS sobre el AOI; cubren el área y muestran el contraste esperado entre verano e invierno.
 - 2026-10-14 — Bloque 4, revisión src/ingest.py según PIPELINE (Cursor): El archivo ya cumplía lo indicado, no fue necesario modificarlo y no se tocaron los datos de data/raw. Informó que se leen correctamente el AOI, los 29 polígonos de muestra (6 de humedales, 7 de bosque nativo, 11 de sabana / pastizal y 5 de urbanizado) y las dos imágenes, todos en EPSG:5347.
@@ -191,6 +192,6 @@ Este archivo es la diferencia entre un método documentado y una sucesión de aj
 
 * **Etapa:** cierre
 * **Checklist de `REGLAS_AGENTE.md` §7 revisado:** Caso A y AOI dentro del techo: sí. Ventanas definidas: sí. `docs/clases.md` completo: sí. Decisiones fechadas: sí. Cada clase con ROI de entrenamiento y de validación: sí. Mapa en `data/processed/mapa_prediccion.tif` con MMU aplicada: sí. Resumen con métricas: `outputs/resumen_TF_2026-10-15.json`. Declaración de uso de IA: en el informe (sección 6) y en la sección 5 de este archivo.
-* **Limitaciones del resumen incorporadas al informe:** pendiente de confirmación.
-* **Pendientes:** Confirmar si el texto de limitaciones del bloque 8 ya está pegado en el informe.
+* **Limitaciones del resumen incorporadas al informe:** sí (sección 5 del informe)
+* **Pendientes:** ninguno
 * **Responsable (humano):** MAGALI POUPARD
