@@ -157,10 +157,31 @@
     "C:\\Users\\Admin\\Documents\\1.DIPLOMATURA IA Y SIG\\MODULO 5\\TF_Modulo5-20260925T212212Z-1-001\\TF_Modulo5\\data\\processed\\mapa_prediccion.tif"
   ],
   "asistencia_ia": {
-    "herramienta": "",
-    "etapas": [],
-    "decisiones_humanas": [],
-    "verificacion": []
+    "herramienta": "Cursor con el modelo Grok 4.7 (código); Claude, de Anthropic (orientación metodológica, normativa y bibliografía, revisión de resultados)",
+    "etapas": [
+      "Descarga de Sentinel-2 L2A por STAC (Cursor)",
+      "Ingesta de AOI, ROI e imágenes (Cursor)",
+      "Cálculo de índices y corrección del desplazamiento de 1000 y piso en 0 (Cursor; detección con asistencia de Claude)",
+      "Random Forest y tamizado por MMU (Cursor)",
+      "Matriz de confusión y superficie ajustada (Cursor)",
+      "Redacción de limitaciones, docs/decisiones.md e informe (Cursor y revisión mia)"
+    ],
+    "decisiones_humanas": [
+      "Variante A y AOI",
+      "Esquema de clases y umbrales",
+      "MMU de 0,5 ha",
+      "Sistema de referencia EPSG:5347",
+      "Ventanas temporales",
+      "Digitalización y etiquetado de los ROI",
+      "No corregir los ROI 7 y 12 después de conocer los resultados",
+      "Interpretación final de los resultados"
+    ],
+    "verificacion": [
+      "Revisión visual en QGIS de las composiciones y del mapa, y de los ROI de validación con altos niveles de desaciertos (7 y 12) para interpretar sus causas",
+      "Control de los ROI (cantidad, superficie, clase y distancias)",
+      "Detección del desplazamiento radiométrico por los rangos de NDVI (señalada por Claude) y confirmación en los metadatos de las 34 escenas (Cursor, a pedido mio)",
+      "Verificación de la superficie ajustada y sus intervalos con asistencia de Claude: los valores coincidieron con el resumen"
+    ]
   },
   "limitaciones": [
     "Validacion espacial minima: el desempeno puede degradarse fuera del AOI.",

@@ -53,15 +53,17 @@ Este archivo es la diferencia entre un método documentado y una sucesión de aj
 
 ### 2026-10-13 — Ajuste de AOI
 
- * **Ajuste AOI:**  Se corrigió el límite norte del polígono; la superficie pasó de aprox. 10.706 ha a 10.764 ha (calculada en QGIS )
- * **Fundamento:** Incorporar zona donde en el mapa actual de OTBN, identifica área de bosque nativo, y afinar mejor el límite del área urbanizada.
- * **Responsable (humano):** MAGALI POUPARD
+* **Etapa:** caso-AOI
+* **Ajuste AOI:**  Se corrigió el límite norte del polígono; la superficie pasó de aprox. 10.706 ha a 10.764 ha (calculada en QGIS )
+* **Fundamento:** Incorporar zona donde en el mapa actual de OTBN, identifica área de bosque nativo, y afinar mejor el límite del área urbanizada.
+* **Responsable (humano):** MAGALI POUPARD
 
 
 ## 2\. Clases y umbrales
 
 ### 2026-10-01 — Esquema de clases
 
+* **Etapa:** Clases 
 * **Decisión:** Esquema de 4 clases: 1 humedales y cuerpos de agua, 2 bosque nativo, 3 sabana / pastizal, 4 urbanizado. (vincular a `docs/clases.md`)  
 * **MMU** (*Minimum Mapping Unit*): 0.5 ha — **¿se aplicó el tamizado?** sí (APLICAR_MMU = True en src/config.py)
 * **Fundamento:** El umbral de bosque nativo (cobertura de copas ≥ 20 %, altura ≥ 3 m, superficie ≥ 0,5 ha.) y la MMU siguen la Res. COFEMA 230/12 (Pauta 1.2), para que el mapa sea coherente con la definición legal de bosque nativo que rige el OTBN. Estos umbrales son compatibles con el LCCS de la FAO (árboles de 3 m o más con fisonomía arbórea y cobertura abierta o cerrada; Di Gregorio & Jansen, 2005, §3.4.1). Para humedales / cuerpos de agua, se adopta la definición amplia de humedal de la Convención de Ramsar (1971, art. 1.1; Ley 23.919), que incluye cuerpos de agua permanentes y temporales.
@@ -74,6 +76,7 @@ Este archivo es la diferencia entre un método documentado y una sucesión de aj
 
 ### 2026-10-13 — Ventanas temporales
 
+* **Etapa:** Evidencia
 * **Ventana 1:** 2026-01-01 / 2026-04-01 (verano).
 * **Ventana 2:** 2026-06-01 / 2026-09-01 (invierno).
 * **Fundamento fenológico de la elección:** Se eligen estaciones contrastantes del mismo ciclo anual. En verano todas las coberturas vegetales presentan alto verdor (bosque, sabana y pastizal tienen comportamientos espectrales similares). En invierno, a diferencia de los pastizales, el bosque nativo conserva mayormente el follaje. 
@@ -124,20 +127,23 @@ Este archivo es la diferencia entre un método documentado y una sucesión de aj
 * **Etapa:** implementación
 * **Decisión:** Se volvió a entrenar el Random Forest (200 árboles, `class_weight="balanced_subsample"`, semilla 42) con el desplazamiento de 1000 y el piso de reflectancia en 0. La MMU de 0,5 ha se aplicó. Dentro del AOI se removieron 146.043 píxeles por parches menores a 50 píxeles.
 * **Superficie por conteo de píxeles dentro del AOI:** clase 1, 798,16 ha; clase 2, 2.061,53 ha; clase 3, 5.709,57 ha; clase 4, 738,90 ha; no cartografiado (`-1`), 1.461,43 ha. No es la superficie ajustada por error.
-* **Evidencia / archivo:** `data/processed/mapa_prediccion.tif`; `outputs/resumen_TF_2026-10-14.json`
+* **Evidencia / archivo:** `data/processed/mapa_prediccion.tif`; `outputs/resumen_TF_2026-10-15.json`
 * **Responsable (humano):** MAGALI POUPARD
 
 ---
 
 ## 4\. Muestreo y validación
 
-### \_\_\_\_-**\-** — Diseño del muestreo
+### 2026-10-15 — Diseño del muestreo
 
-* **ROI por clase (entrenamiento / validación):**  
-* **Independencia:** distancia mínima / fallback documentado  
-* **ROI descartados por proximidad:**  
-* **Píxeles de validación por polígono:**  
-* **Limitación asumida:**
+* **Etapa:** muestreo
+* **ROI por clase (entrenamiento / validación):** 29 polígonos. Humedales: 4 de entrenamiento y 2 de validación (id 7 y 27). Bosque nativo: 5 y 2 (id 1 y 3). Sabana / pastizal: 8 y 3 (id 10, 20 y 26). Urbanizado: 3 y 2 (id 12 y 15).
+* **Independencia:** distancia mínima de 200 m entre centroides de entrenamiento y de validación. No se usó el fallback aleatorio.
+* **ROI descartados por proximidad:** 0.
+* **Píxeles de validación por polígono:** 5. En total, 45 píxeles de 9 polígonos.
+* **Limitación asumida:** Esos 45 píxeles se tratan como muestras independientes, aunque provienen de 9 polígonos. El ROI 7 (humedal) incluye el borde del cuerpo de agua y el ROI 12 (urbanizado) queda cerca del umbral del 30 % de construcciones. No se redibujaron después de ver el mapa.
+* **Evidencia / archivo:** `outputs/resumen_TF_2026-10-15.json`; `data/raw/rois.geojson`
+* **Responsable (humano):** MAGALI POUPARD
 
 ---
 
@@ -146,7 +152,7 @@ Este archivo es la diferencia entre un método documentado y una sucesión de aj
 ### 2026-10-14 — Bloques asistidos
 
 * **Etapa:** implementación
-* **Herramienta / modelo:**   Cursor, con el modelo Grok 4.7, para el trabajo sobre el código. Claude (Anthropic) para orientación metodológica, búsqueda de normativa y bibliografía.
+* **Herramienta / modelo:**   Cursor, con el modelo Grok 4.7, para el trabajo sobre el código. Claude (Anthropic) para orientación metodológica, búsqueda de normativa, bibliografía y revisión de resultados,
 * **Bloques en que intervino la IA:**  - 2026-10-14 — Bloque 1, verificación de AOI y variante (Cursor): recalculó la superficie desde la geometría (10.769,6 ha planimétrica vs. 10.764,4 ha en QGIS), confirmó la variante A y las ventanas, y detectó un error de sintaxis en src/config.py (corregido)
 - 2026-10-14 — Bloque 2, revisión de ventanas temporales (Cursor): confirmó que el contraste verano–invierno sirve para separar bosque nativo de sabana / pastizal y señaló sus límites (umbral del 20 %, altura, inundaciones breves, cultivos y forestaciones). Se decide mantener las ventanas. A partir de esta revisión, se incorporó a docs/clases.md el confusor de forestaciones.
 - 2026-10-14 — Bloque 3, descarga de Sentinel-2 L2A por STAC (Cursor): instaló las dependencias, ejecutó src/download_s2_stac.py con las ventanas predefinidas y redactó la entrada de la sección 3 (revisada y aceptada). Desactivó, solo para esa descarga, la verificación de certificados de la conexión, que fallaba en esta computadora. Verificación: composiciones revisadas en QGIS sobre el AOI; cubren el área y muestran el contraste esperado entre verano e invierno.
@@ -155,10 +161,11 @@ Este archivo es la diferencia entre un método documentado y una sucesión de aj
 - 2026-10-14 — Corrección del bloque 5: Al revisar los rangos de los índices con asistencia de Claude, el NDVI máximo de verano (0,69) resultó más bajo de lo esperable. Le consulté a Cursor, que confirmó que las 34 escenas tienen línea de procesamiento 05.11 o 05.12 y que el desplazamiento de 1000 no se restaba. Le pedí restarlo antes de calcular los índices. Según su respuesta, al restar quedaban valores negativos, sobre todo en agua fuera del AOI, que hacían salir los índices de −1 a 1; le pedí llevarlos a 0. No se modificaron los datos originales. El mapa y el resumen del bloque 6 provisorio quedaron incluidos por error en el commit del bloque 5; se reemplazan al volver a ejecutar el bloque 6
 - 2026-10-14 — Bloque 6 (modelo y MMU, repetido): Le pedí a Cursor volver a ejecutar el modelo con los índices corregidos y los parámetros de config.py. Según su respuesta, dentro del AOI quedaron 100 píxeles sin dato, que el modelo no clasifica, y la MMU dejó sin clase 1.460 ha (14 % del AOI). Las superficies por conteo de píxeles quedan para ajustar en el bloque 7.
 - 2026-10-15 — Bloque 7 (matriz y superficie ajustada): Le pedí a Cursor calcular la matriz de confusión y la superficie ajustada por error. Según su respuesta, la exactitud global es 0,80 (45 píxeles en 9 polígonos de validación) y el bosque nativo ajustado es 1.874 ha (IC 95 %: 1.507–2.241 ha). Claude verificó las cuentas con la fórmula de Olofsson et al. (2014) y coinciden.
-- 2026-10-15 — Bloque 8 (limitaciones): Le pedí a Cursor redactar las limitaciones a partir del resumen. Le solicité a Claude revisar el texto, porque una frase quedaba sin sentido, la interpretó, y corridgió; la versión final la revisé yo.
-Observación: El ROI 7 (humedal) incluye por error el borde del cuerpo de agua; explica 5 de los 6 errores de humedales.El ROI 12 (urbanizado) se ubicó en un sector con construcciones dispersas y terreno con vegetación, cercano al límite del 30 % de construcciones que define la clase; explica los 3 errores de urbanizado, clasificados como sabana / pastizal No se corrigió después de conocer los resultados, para no modificar la referencia en función de lo que mostró el mapa. 
+- 2026-10-15 — Bloque 8 (limitaciones): Le pedí a Cursor redactar las limitaciones a partir del resumen. Le solicité a Claude revisar el texto, porque una frase quedaba sin sentido; la interpretó y corrigió. La versión final la revisé yo.
+2026-10-15 — Bloque 9 (registro de decisiones): Le pedí a Cursor completar este archivo solo con hechos ya confirmados. Revisé su propuesta y completé los datos faltantes.
+- Observación: El ROI 7 (humedal) incluye por error el borde del cuerpo de agua; explica 5 de los 6 errores de humedales. El ROI 12 (urbanizado) se ubicó en un sector con construcciones dispersas y terreno con vegetación, cercano al límite del 30 % de construcciones que define la clase; explica los 3 errores de urbanizado, clasificados como sabana / pastizal. No se corrigieron después de conocer los resultados, para no modificar la referencia en función de lo que mostró el mapa. 
 * **Decisiones humanas no delegadas:** Elección de la variante y del AOI; esquema de clases y umbrales; MMU; sistema de referencia; ventanas temporales; digitalización y etiquetado de las muestras; interpretación de los resultados. 
-* **Verificación aplicada sobre las salidas:** Superficie del AOI contrastada con el cálculo de QGIS y con una verificación independiente; corrección de config.py revisada antes de aceptarla.
+* **Verificación aplicada sobre las salidas:** Superficie del AOI contrastada con el cálculo de QGIS y con una verificación independiente; corrección de config.py revisada antes de aceptarla. Se revisó visualmente en QGIS las composiciones, el mapa y los ROI de validación con errores. Con asistencia de Claude se detectó el desplazamiento radiométrico a partir de los rangos de NDVI (luego confirmado por Cursor en los metadatos) y se recalcularon la superficie ajustada y sus intervalos, que coincidieron con el resumen.
 * **Responsable (humano):** MAGALI POUPARD
 
 ---
@@ -180,8 +187,10 @@ Observación: El ROI 7 (humedal) incluye por error el borde del cuerpo de agua; 
 
 ## 7\. Cierre
 
-### \_\_\_\_-**\-** — Listo para entrega
+### 2026-10-15 — Listo para entrega
 
-* Checklist de `REGLAS_AGENTE.md` §7 revisado: sí / no  
-* Limitaciones del resumen incorporadas al informe: sí / no  
-* Pendientes:
+* **Etapa:** cierre
+* **Checklist de `REGLAS_AGENTE.md` §7 revisado:** Caso A y AOI dentro del techo: sí. Ventanas definidas: sí. `docs/clases.md` completo: sí. Decisiones fechadas: sí. Cada clase con ROI de entrenamiento y de validación: sí. Mapa en `data/processed/mapa_prediccion.tif` con MMU aplicada: sí. Resumen con métricas: `outputs/resumen_TF_2026-10-15.json`. Declaración de uso de IA: en el informe (sección 6) y en la sección 5 de este archivo.
+* **Limitaciones del resumen incorporadas al informe:** pendiente de confirmación.
+* **Pendientes:** Confirmar si el texto de limitaciones del bloque 8 ya está pegado en el informe.
+* **Responsable (humano):** MAGALI POUPARD
